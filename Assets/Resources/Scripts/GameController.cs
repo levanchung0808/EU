@@ -20,7 +20,6 @@ public class GameController : MonoBehaviour
         warShip.transform.Translate(Vector3.right * speed * Time.deltaTime);
         if ((player.transform.localPosition.x - warShip.transform.position.x) >= 20)
         {
-            Debug.Log("Xa quá rồi");
             speed = 15;
         }
         if ((player.transform.localPosition.x - warShip.transform.position.x) <= 12)
