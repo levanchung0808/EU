@@ -1,24 +1,31 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
     public GameObject warShip;
-    public float speed = 10f;
-    
+    public GameObject player;
+    public float speed;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        speed = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*warShip.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,speed));
-        player.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, speed));*/
         warShip.transform.Translate(Vector3.right * speed * Time.deltaTime);
-       
+        if ((player.transform.localPosition.x - warShip.transform.position.x) >= 20)
+        {
+            Debug.Log("Xa quá rồi");
+            speed = 15;
+        }
+        if ((player.transform.localPosition.x - warShip.transform.position.x) <= 12)
+        {
+            speed = 10;
+        }
     }
 }

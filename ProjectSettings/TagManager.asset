@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Collider
   - LightWareship
+  - BuffSpeed
+  - SlowSpeed
+  - Fireball
   layers:
   - Default
   - TransparentFX
