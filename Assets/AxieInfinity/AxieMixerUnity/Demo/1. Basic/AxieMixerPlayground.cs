@@ -100,10 +100,10 @@ namespace Game
 
             int k = 0;
             string bodyMode = bodyDropDown.options[bodyDropDown.value].text.ToLower().Replace("body ", "");
-            for (int classIdx = 0;classIdx < 6;classIdx++)
+            for (int classIdx = 0; classIdx < 6; classIdx++)
             {
                 var characterClass = (CharacterClass)classIdx;
-                for (int classValue = 2;classValue <= 12;classValue += 2)
+                for (int classValue = 2; classValue <= 12; classValue += 2)
                 {
                     string key = $"{characterClass}-{classValue:00}";
                     //
@@ -118,7 +118,7 @@ namespace Game
                 }
             }
 
-            for (int classIdx = 0;classIdx < 6;classIdx++)
+            for (int classIdx = 0; classIdx < 6; classIdx++)
             {
                 var characterClass = (CharacterClass)classIdx;
                 string key = $"{characterClass}-mystic-02";
@@ -126,21 +126,21 @@ namespace Game
             }
 
             {
-                for (int classValue = 1;classValue <= 2;classValue += 1)
+                for (int classValue = 1; classValue <= 2; classValue += 1)
                 {
                     string key = $"xmas-{classValue:00}";
                     bodies.Add((key, "body-frosty", 0, classValue));
                 }
             }
             {
-                for (int classValue = 1;classValue <= 3;classValue += 1)
+                for (int classValue = 1; classValue <= 3; classValue += 1)
                 {
                     string key = $"japan-{classValue:00}";
                     bodies.Add((key, "body-normal", 0, classValue));
                 }
             }
             {
-                for (int classValue = 0;classValue <= 1;classValue += 1)
+                for (int classValue = 0; classValue <= 1; classValue += 1)
                 {
                     string key = $"agamo-{classValue:00}";
                     bodies.Add((key, "body-agamo", 0, classValue));
@@ -385,9 +385,9 @@ namespace Game
             tex_white.Apply();
 
             // Create Alpha from the difference between black and white camera renders
-            for (int y = 0;y < tex_transparent.height;++y)
+            for (int y = 0; y < tex_transparent.height; ++y)
             {
-                for (int x = 0;x < tex_transparent.width;++x)
+                for (int x = 0; x < tex_transparent.width; ++x)
                 {
                     float alpha = tex_white.GetPixel(x, y).r - tex_black.GetPixel(x, y).r;
                     alpha = 1.0f - alpha;

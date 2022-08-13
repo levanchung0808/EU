@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,10 +15,16 @@ public class PlayerController : MonoBehaviour
     //shooting
     public Transform firePosition;
     public GameObject projectile;
-    public GameObject Shiled;
-    private bool canShoot = true;
-    private float cooldownTimeShotting = 0.5f;
-    GameObject obj;
+    public bool canShoot = true;
+    public float cooldownTimeShotting;
+    public int ammoAmount;
+    public Text txtNumAmmo;
+    GameObject objProjectitle;
+
+    //Progressbar distance player to win
+    public Slider sldProgressBarPercent;
+    float maxDistance;
+    public float maxX = 524.5369f;  //Position end map
 
     void Start()
     {
@@ -27,6 +34,11 @@ public class PlayerController : MonoBehaviour
         slowTimer = 0;
         boosting = false;
         slowing = false;
+        cooldownTimeShotting = 0.5f;
+        ammoAmount = 5;
+        txtNumAmmo.text = ammoAmount.ToString();
+
+        maxDistance = getDistance();
     }
 
     // Update is called once per frame
@@ -36,7 +48,7 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.right * speed * Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 300));
         }
 
         if (boosting)
@@ -61,20 +73,21 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && ammoAmount > 0)
         {
             if (canShoot)
             {
                 StartCoroutine(shoot());
+                ammoAmount -= 1;
+                txtNumAmmo.text = ammoAmount.ToString();
             }
         }
-        if (Input.GetKeyDown(KeyCode.C))
+
+        //Distance start position to end position
+        if (transform.position.x <= maxDistance && transform.position.x <= maxX)
         {
-            if (canShoot)
-            {
-                var myShiled = Instantiate(Shiled,new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-                myShiled.transform.parent = gameObject.transform;
-            }
+            float distance = 1 - (getDistance() / maxDistance);
+            setProgress(distance);
         }
     }
 
@@ -114,14 +127,24 @@ public class PlayerController : MonoBehaviour
 
     void shootLogic()
     {
-        obj = Instantiate(projectile, firePosition.position, firePosition.rotation);
+        objProjectitle = Instantiate(projectile, firePosition.position, firePosition.rotation);
         if (transform.localScale.x == -0.2f)
         {
-            obj.transform.eulerAngles = new Vector3(0f, 0f, 180f);
+            objProjectitle.transform.eulerAngles = new Vector3(0f, 0f, 180f);
         }
         else
         {
-            obj.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            objProjectitle.transform.eulerAngles = new Vector3(0f, 0f, 0f);
         }
+    }
+
+    float getDistance()
+    {
+        return Vector2.Distance(transform.position, new Vector2(maxX, transform.position.y));
+    }
+
+    void setProgress(float p)
+    {
+        sldProgressBarPercent.value = p;
     }
 }
