@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     //shooting
     public Transform firePosition;
     public GameObject projectile;
+    public GameObject Shiled;
     private bool canShoot = true;
     private float cooldownTimeShotting = 0.5f;
     GameObject obj;
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.right * speed * Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 300));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
         }
 
         if (boosting)
@@ -65,6 +66,14 @@ public class PlayerController : MonoBehaviour
             if (canShoot)
             {
                 StartCoroutine(shoot());
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (canShoot)
+            {
+                var myShiled = Instantiate(Shiled,new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                myShiled.transform.parent = gameObject.transform;
             }
         }
     }

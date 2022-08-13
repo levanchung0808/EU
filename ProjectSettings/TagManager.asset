@@ -9,6 +9,7 @@ TagManager:
   - BuffSpeed
   - SlowSpeed
   - Fireball
+  - shiled
   layers:
   - Default
   - TransparentFX
