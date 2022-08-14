@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     //shooting
     public Transform firePosition;
     public GameObject projectile;
+    public GameObject shilde;
     public bool canShoot = true;
     public float cooldownTimeShotting;
     public int ammoAmount;
@@ -25,7 +26,8 @@ public class PlayerController : MonoBehaviour
     public Slider sldProgressBarPercent;
     float maxDistance;
     public float maxX = 524.5369f;  //Position end map
-
+    bool isGround = false;
+    int jumpCount = 2;
     void Start()
     {
         speed = 10;
@@ -36,9 +38,9 @@ public class PlayerController : MonoBehaviour
         slowing = false;
         cooldownTimeShotting = 0.5f;
         ammoAmount = 5;
-        txtNumAmmo.text = ammoAmount.ToString();
+       txtNumAmmo.text = ammoAmount.ToString();
 
-        maxDistance = getDistance();
+       maxDistance = getDistance();
     }
 
     // Update is called once per frame
@@ -46,9 +48,18 @@ public class PlayerController : MonoBehaviour
     {
 
         transform.Translate(Vector3.right * speed * Time.deltaTime);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&&jumpCount!=0&&isGround)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 300));
+            if(jumpCount==2)
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity *400));
+            }
+            jumpCount--;
+            isGround = false;
         }
 
         if (boosting)
@@ -82,7 +93,11 @@ public class PlayerController : MonoBehaviour
                 txtNumAmmo.text = ammoAmount.ToString();
             }
         }
-
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            var myShilde = Instantiate(shilde,new  Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            myShilde.transform.parent = gameObject.transform;
+        }
         //Distance start position to end position
         if (transform.position.x <= maxDistance && transform.position.x <= maxX)
         {
@@ -114,8 +129,17 @@ public class PlayerController : MonoBehaviour
             speed = 8;
             Destroy(collision.gameObject);
         }
+      
     }
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "isGround")
+        {
+            isGround = true;
+            jumpCount = 2;
+            Debug.Log("matdat");
+        }
+    }
     public IEnumerator shoot()
     {
         shootLogic();
