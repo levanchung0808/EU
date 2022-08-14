@@ -7,14 +7,16 @@ using Spine.Unity;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class SelectCharacter : MonoBehaviour
 {
-    [SerializeField] Button mixBtn;
+    [SerializeField] Button PrevAxieBtn;
+    [SerializeField] Button NextAxieBtn;
     [SerializeField] Button leftAnimBtn;
     [SerializeField] Button rightAnimBtn;
     [SerializeField] Dropdown animationDropDown;
-    [SerializeField] InputField axieIdInputField;
     [SerializeField] Dropdown bodyDropDown;
     [SerializeField] Toggle allAxieToggle;
     [SerializeField] Toggle customIdToggle;
@@ -24,11 +26,21 @@ public class SelectCharacter : MonoBehaviour
 
     const bool USE_GRAPHIC = false;
 
+    System.Random r = new System.Random();
+    List<string> arrAxieRd = new List<string>();
+
+    private void Awake()
+    {
+        //test spawn 1
+        StartCoroutine(GetAxiesGenes("5"));
+    }
+
     private void OnEnable()
     {
-        mixBtn.onClick.AddListener(OnMixButtonClicked);
-        allAxieToggle.onValueChanged.AddListener((b) => { if (b) OnSwitch(); });
-        customIdToggle.onValueChanged.AddListener((b) => { if (b) OnSwitch(); });
+        PrevAxieBtn.onClick.AddListener(OnPrevButtonClicked);
+        NextAxieBtn.onClick.AddListener(OnMixButtonClicked);
+        /*allAxieToggle.onValueChanged.AddListener((b) => { if (b) OnSwitch(); });*/
+        /*customIdToggle.onValueChanged.AddListener((b) => { if (b) OnSwitch(); });*/
         animationDropDown.onValueChanged.AddListener((_) => OnAnimationChanged());
         leftAnimBtn.onClick.AddListener(() => OnAnimationStep(-1));
         rightAnimBtn.onClick.AddListener(() => OnAnimationStep(1));
@@ -36,9 +48,10 @@ public class SelectCharacter : MonoBehaviour
 
     private void OnDisable()
     {
-        mixBtn.onClick.RemoveListener(OnMixButtonClicked);
-        allAxieToggle.onValueChanged.RemoveAllListeners();
-        customIdToggle.onValueChanged.RemoveAllListeners();
+        PrevAxieBtn.onClick.RemoveListener(OnPrevButtonClicked);
+        NextAxieBtn.onClick.RemoveListener(OnMixButtonClicked);
+        /*allAxieToggle.onValueChanged.RemoveAllListeners();
+        customIdToggle.onValueChanged.RemoveAllListeners();*/
         animationDropDown.onValueChanged.RemoveAllListeners();
         leftAnimBtn.onClick.RemoveAllListeners();
         rightAnimBtn.onClick.RemoveAllListeners();
@@ -56,17 +69,13 @@ public class SelectCharacter : MonoBehaviour
         //get all object
         /*TestAll();*/
 
-        //test spawn 1
-        /*StartCoroutine(GetAxiesGenes("5"));*/
-
         //test spawn 6
-        Test6();
+        /*Test6();*/
     }
 
     void OnSwitch()
     {
         bodyDropDown.gameObject.SetActive(allAxieToggle.isOn);
-        axieIdInputField.gameObject.SetActive(customIdToggle.isOn);
     }
 
     //Play animation when change Dropdown
@@ -225,7 +234,7 @@ public class SelectCharacter : MonoBehaviour
             return;
         }
         float scale = 0.01f;
-
+        arrAxieRd.Add(axieId.ToString());
         var builderResult = builder.BuildSpineFromGene(axieId, genesStr, scale, isGraphic);
 
 
@@ -258,11 +267,12 @@ public class SelectCharacter : MonoBehaviour
     {
         ClearAll();
         GameObject go = new GameObject("DemoAxie");
-        go.transform.localPosition = new Vector3(0f, -2.4f, 0f);
+        go.transform.localPosition = new Vector3(-4f, -1.5f, 0f);
         SkeletonAnimation runtimeSkeletonAnimation = SkeletonAnimation.NewSkeletonAnimationGameObject(builderResult.skeletonDataAsset);
         runtimeSkeletonAnimation.gameObject.layer = LayerMask.NameToLayer("Player");
         runtimeSkeletonAnimation.transform.SetParent(go.transform, false);
-        runtimeSkeletonAnimation.transform.localScale = Vector3.one;
+        /*runtimeSkeletonAnimation.transform.localScale = Vector3.one;*/
+        runtimeSkeletonAnimation.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
 
         runtimeSkeletonAnimation.gameObject.AddComponent<AutoBlendAnimController>();
         runtimeSkeletonAnimation.state.SetAnimation(0, "action/idle/normal", true);
@@ -302,9 +312,14 @@ public class SelectCharacter : MonoBehaviour
     }
 
     bool isFetchingGenes = false;
+
     public void OnMixButtonClicked()
     {
-        if (allAxieToggle.isOn)
+        int rdAxie = r.Next(5, 3699);
+        
+        isFetchingGenes = false;
+        StartCoroutine(GetAxiesGenes(rdAxie.ToString()));
+        /*if (allAxieToggle.isOn)
         {
             TestAll();
         }
@@ -312,7 +327,14 @@ public class SelectCharacter : MonoBehaviour
         {
             if (isFetchingGenes) return;
             StartCoroutine(GetAxiesGenes(axieIdInputField.text));
-        }
+        }*/
+    }
+
+    public void OnPrevButtonClicked()
+    {
+        
+        isFetchingGenes = false;
+        StartCoroutine(GetAxiesGenes(arrAxieRd[arrAxieRd.Count-2].ToString()));
     }
 
     //API GET AxoesGenes
@@ -563,5 +585,10 @@ public class SelectCharacter : MonoBehaviour
             }
         }
         Debug.Log("Done");
+    }
+
+    public void Play()
+    {
+        SceneManager.LoadScene("Level_Game");
     }
 }

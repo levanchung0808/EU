@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,7 +36,6 @@ namespace Game
         void Start()
         {
             figure = gameObject.GetComponentInChildren<AxieFigure>();
-            Debug.Log(figure);
             speed = 10;
             velocity = 1;
             boostTimer = 0;
@@ -133,6 +132,12 @@ namespace Game
             {
                 Time.timeScale = 0;
             }
+
+            if(collision.tag == "lava")
+            {
+                Debug.Log("Bạn đã thua");
+                Time.timeScale = 0;
+            }
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -140,7 +145,6 @@ namespace Game
             {
                 isGround = true;
                 jumpCount = 2;
-                Debug.Log("matdat");
             }
             if (collision.gameObject.tag == "lava")
             {

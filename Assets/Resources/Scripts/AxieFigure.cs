@@ -33,7 +33,7 @@ namespace Game
 
         public void SetGenes(string id, string genes)
         {
-            Debug.Log("Có chạy");
+            Debug.Log("Get Player Succesfully!");
             if (string.IsNullOrEmpty(genes)) return;
 
             if (skeletonAnimation != null && skeletonAnimation.state != null)
