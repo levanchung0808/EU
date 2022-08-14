@@ -166,6 +166,8 @@ MonoBehaviour:
   projectile: {fileID: 4856169694717503113, guid: 7bc5564d8d8cdc0498d15f04c4c1f6a2,
     type: 3}
   shilde: {fileID: 3663187193389731996, guid: 772af821289613b4082bc516afaa5f07, type: 3}
+  jumpEffect: {fileID: 992540210650146447, guid: c30ce8d34ef45364d9843f017266c802,
+    type: 3}
   canShoot: 1
   cooldownTimeShotting: 0
   ammoAmount: 0
@@ -187,7 +189,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1.5
+  m_GravityScale: 1.25
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -283,6 +285,7 @@ Transform:
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 2082582067}
+  - {fileID: 1676338837}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -998,6 +1001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warShip: {fileID: 1156764219}
   player: {fileID: 64574333}
+  _birdFigure: {fileID: 1676338836}
   speed: 10
 --- !u!4 &457211297
 Transform:
@@ -2489,6 +2493,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1676338835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1676338837}
+  - component: {fileID: 1676338836}
+  m_Layer: 0
+  m_Name: player_figure
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1676338836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676338835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3558fe25224eb3f498d6abcacc472fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flipX: 0
+--- !u!4 &1676338837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676338835}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 64574338}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1693161233
 GameObject:
   m_ObjectHideFlags: 0

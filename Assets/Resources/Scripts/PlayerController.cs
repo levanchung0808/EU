@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public Transform firePosition;
     public GameObject projectile;
     public GameObject shilde;
+    public GameObject jumpEffect;
     public bool canShoot = true;
     public float cooldownTimeShotting;
     public int ammoAmount;
@@ -48,16 +49,10 @@ public class PlayerController : MonoBehaviour
     {
 
         transform.Translate(Vector3.right * speed * Time.deltaTime);
-        if (Input.GetKeyDown(KeyCode.Space)&&jumpCount!=0&&isGround)
+        if (Input.GetKeyDown(KeyCode.Space)&&jumpCount!=0)
         {
-            if(jumpCount==2)
-            {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity *400));
-            }
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
+            Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
             jumpCount--;
             isGround = false;
         }

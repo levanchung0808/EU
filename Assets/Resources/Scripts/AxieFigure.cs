@@ -49,6 +49,7 @@ namespace Game
             skeletonAnimation.skeleton.FindSlot("shadow").Attachment = null;
             skeletonAnimation.state.SetAnimation(0, "action/idle/normal", true);
             skeletonAnimation.state.End += SpineEndHandler;
+            Debug.Log("Có chạy");
         }
 
         private void OnDisable()
