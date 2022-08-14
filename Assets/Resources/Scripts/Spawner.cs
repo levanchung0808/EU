@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour
     public GameObject Ground_1;
     public GameObject Ground_2;
     public GameObject Ground_3;
+    public GameObject Ground_4;
+    public GameObject Ground_5;
     System.Random r = new System.Random();
     public GameObject objPlayer;
     public bool isSpawn = false;
@@ -32,16 +34,28 @@ public class Spawner : MonoBehaviour
     }
     private void spawnGround()
     {
-        int x = r.Next(1, 3);
+        int x = r.Next(1, 6);
         switch (x)
         {
             case 1:
                 Debug.Log(1);
-                Instantiate(Ground_1, new Vector3(transform.position.x, 8, transform.position.z), transform.rotation);
+                Instantiate(Ground_1, new Vector3(transform.localPosition.x, 8, transform.localPosition.z), transform.rotation);
                 break;
             case 2:
                 Debug.Log(2);
-                Instantiate(Ground_2, new Vector3(transform.position.x, 8, transform.position.z), transform.rotation);
+                Instantiate(Ground_2, new Vector3(transform.localPosition.x, 8, transform.localPosition.z), transform.rotation);
+                break;
+            case 3:
+                Debug.Log(3);
+                Instantiate(Ground_3, new Vector3(transform.localPosition.x, 8, transform.localPosition.z), transform.rotation);
+                break;
+            case 4:
+                Debug.Log(4);
+                Instantiate(Ground_4, new Vector3(transform.localPosition.x, 8, transform.localPosition.z), transform.rotation);
+                break;
+            case 5:
+                Debug.Log(5);
+                Instantiate(Ground_5, new Vector3(transform.localPosition.x, 8, transform.localPosition.z), transform.rotation);
                 break;
         }
 

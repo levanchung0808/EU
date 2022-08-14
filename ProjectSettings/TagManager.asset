@@ -12,6 +12,8 @@ TagManager:
   - shiled
   - creatground
   - isGround
+  - Undefined
+  - lava
   layers:
   - Default
   - TransparentFX

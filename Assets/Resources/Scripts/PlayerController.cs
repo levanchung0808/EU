@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     //Progressbar distance player to win
     public Slider sldProgressBarPercent;
     float maxDistance;
-    public float maxX = 524.5369f;  //Position end map
+    public float maxX = 600f;  //Position end map
     bool isGround = false;
     int jumpCount = 2;
     void Start()
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
         //Distance start position to end position
         if (transform.position.x <= maxDistance && transform.position.x <= maxX)
         {
-            float distance = 1 - (getDistance() / maxDistance);
+            float distance = 1-(getDistance() / maxDistance);
             setProgress(distance);
         }
     }
@@ -133,6 +133,10 @@ public class PlayerController : MonoBehaviour
             isGround = true;
             jumpCount = 2;
             Debug.Log("matdat");
+        }
+        if (collision.gameObject.tag == "lava")
+        {
+            Time.timeScale = 0;
         }
     }
     public IEnumerator shoot()

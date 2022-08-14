@@ -328,13 +328,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5834259347146932730, guid: 0f3f041f6400a134ba8fdee7ed05d08c,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.7769506
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834259347146932730, guid: 0f3f041f6400a134ba8fdee7ed05d08c,
+        type: 3}
       propertyPath: m_LocalScale.y
       value: 1.3789254
       objectReference: {fileID: 0}
     - target: {fileID: 5834259347146932730, guid: 0f3f041f6400a134ba8fdee7ed05d08c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.3
+      value: 31.256
       objectReference: {fileID: 0}
     - target: {fileID: 5834259347146932730, guid: 0f3f041f6400a134ba8fdee7ed05d08c,
         type: 3}
@@ -399,6 +404,11 @@ PrefabInstance:
     - target: {fileID: 3145990788039288596, guid: a62b0ab8880b9c94c8c1e06f90c44c0c,
         type: 3}
       propertyPath: m_Name
+      value: lava
+      objectReference: {fileID: 0}
+    - target: {fileID: 3145990788039288596, guid: a62b0ab8880b9c94c8c1e06f90c44c0c,
+        type: 3}
+      propertyPath: m_TagString
       value: lava
       objectReference: {fileID: 0}
     - target: {fileID: 3145990788039288597, guid: a62b0ab8880b9c94c8c1e06f90c44c0c,
@@ -648,13 +658,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5834259347146932730, guid: 0f3f041f6400a134ba8fdee7ed05d08c,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.075131
+      objectReference: {fileID: 0}
+    - target: {fileID: 5834259347146932730, guid: 0f3f041f6400a134ba8fdee7ed05d08c,
+        type: 3}
       propertyPath: m_LocalScale.y
       value: 1.3789254
       objectReference: {fileID: 0}
     - target: {fileID: 5834259347146932730, guid: 0f3f041f6400a134ba8fdee7ed05d08c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 49.2
+      value: 49.148
       objectReference: {fileID: 0}
     - target: {fileID: 5834259347146932730, guid: 0f3f041f6400a134ba8fdee7ed05d08c,
         type: 3}
