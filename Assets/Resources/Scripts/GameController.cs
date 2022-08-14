@@ -5,12 +5,15 @@ using AxieMixer.Unity;
 using Newtonsoft.Json.Linq;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 namespace Game
 {
     public class GameController : MonoBehaviour
     {
         public GameObject warShip;
         public GameObject player;
+        public GameObject gamePause;
+       // public GameObject gameCompelete;
         [SerializeField] AxieFigure _birdFigure;
         public float speed;
 
@@ -36,6 +39,26 @@ namespace Game
             {
                 speed = 10;
             }
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                gamePause.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
+        public void gameLoad()
+        {
+            Time.timeScale = 1;
+            gamePause.SetActive(false);
+           // gameCompelete.SetActive(false);
+        }
+        public void gameVoice()
+        {
+
+        }
+        public void gameRestart()
+        {
+            gameLoad();
+            SceneManager.LoadScene("Level_Game");
         }
     }
 }

@@ -33,6 +33,7 @@ namespace Game
 
         public void SetGenes(string id, string genes)
         {
+            Debug.Log("Có chạy");
             if (string.IsNullOrEmpty(genes)) return;
 
             if (skeletonAnimation != null && skeletonAnimation.state != null)
@@ -49,7 +50,6 @@ namespace Game
             skeletonAnimation.skeleton.FindSlot("shadow").Attachment = null;
             skeletonAnimation.state.SetAnimation(0, "action/idle/normal", true);
             skeletonAnimation.state.End += SpineEndHandler;
-            Debug.Log("Có chạy");
         }
 
         private void OnDisable()
