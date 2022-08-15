@@ -27,7 +27,6 @@ public class Spawner : MonoBehaviour
     {
         if(collision.tag== "creatground")
         {
-            Debug.Log("có chạm");
             spawnGround();
             Destroy(collision.gameObject);
         }

@@ -35,6 +35,9 @@ namespace Game
         //Position end map
         bool isGround = false;
         int jumpCount = 2;
+
+        public GameObject panel_YouLose, panel_YouWin;
+
         void Start()
         {
             figure = gameObject.GetComponentInChildren<AxieFigure>();
@@ -60,7 +63,7 @@ namespace Game
                 if (Input.GetKeyDown(KeyCode.Space) && jumpCount != 0)
                 {
                     GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
-                    Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+                    Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), Quaternion.identity);
                     jumpCount--;
                     isGround = false;
                 }
@@ -119,7 +122,7 @@ namespace Game
             if (collision.tag == "LightWareship")
             {
                 speed = 0;
-                Debug.Log("Player Die");
+                panel_YouLose.SetActive(true);
             }
             if (collision.tag == "BuffSpeed")
             {
@@ -145,12 +148,13 @@ namespace Game
             }
             if (collision.tag == "winZone")
             {
+                panel_YouWin.SetActive(true);
                 Time.timeScale = 0;
             }
 
             if(collision.tag == "lava")
             {
-                Debug.Log("Bạn đã thua");
+                
                 Time.timeScale = 0;
             }
         }
@@ -164,6 +168,7 @@ namespace Game
             if (collision.gameObject.tag == "lava")
             {
                 Time.timeScale = 0;
+                panel_YouLose.SetActive(true);
             }
         }
         public IEnumerator shoot()
