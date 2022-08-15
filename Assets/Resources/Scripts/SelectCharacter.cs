@@ -28,6 +28,8 @@ public class SelectCharacter : MonoBehaviour
 
     System.Random r = new System.Random();
     List<string> arrAxieRd = new List<string>();
+    public static string axieIdCurrentSelect = "";
+    public static string genesStrCurrentSelect = "";
 
     private void Awake()
     {
@@ -83,8 +85,6 @@ public class SelectCharacter : MonoBehaviour
     {
         var animName = animationDropDown.options[animationDropDown.value].text;
         var skeletonAnimations = FindObjectsOfType<SkeletonAnimation>();
-        Debug.Log("animName: " + animName);
-        Debug.Log("skeletonAnimations length: " + skeletonAnimations.Length);
         foreach (var p in skeletonAnimations)
         {
             p.state.SetAnimation(0, animName, true);
@@ -235,6 +235,8 @@ public class SelectCharacter : MonoBehaviour
         }
         float scale = 0.01f;
         arrAxieRd.Add(axieId.ToString());
+        PlayerPrefs.SetString("axieId", axieId.ToString());
+        PlayerPrefs.SetString("genesStr", genesStr.ToString());
         var builderResult = builder.BuildSpineFromGene(axieId, genesStr, scale, isGraphic);
 
 
