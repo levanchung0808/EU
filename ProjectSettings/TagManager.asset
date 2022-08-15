@@ -15,6 +15,7 @@ TagManager:
   - Undefined
   - lava
   - winZone
+  - BuffShield
   layers:
   - Default
   - TransparentFX

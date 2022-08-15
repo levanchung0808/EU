@@ -17,6 +17,8 @@ namespace Game
         //shooting
         public Transform firePosition;
         public GameObject projectile;
+        public GameObject buffSpeed;
+        public GameObject debuffSpeed;
         public GameObject shilde;
         public GameObject jumpEffect;
         public GameObject winZone;
@@ -124,12 +126,22 @@ namespace Game
                 boosting = true;
                 speed = 15;
                 Destroy(collision.gameObject);
+                var myBuffSpeed = Instantiate(buffSpeed, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                myBuffSpeed.transform.parent = gameObject.transform;
+            }
+            if (collision.tag == "BuffShield")
+            {
+                var myShilde = Instantiate(shilde, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                myShilde.transform.parent = gameObject.transform;
+                Destroy(collision.gameObject);
             }
             if (collision.tag == "SlowSpeed")
             {
                 boosting = true;
                 speed = 8;
                 Destroy(collision.gameObject);
+                var myDeBuffSpeed = Instantiate(debuffSpeed, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                myDeBuffSpeed.transform.parent = gameObject.transform;
             }
             if (collision.tag == "winZone")
             {
