@@ -38,23 +38,18 @@ public class Spawner : MonoBehaviour
         switch (x)
         {
             case 1:
-                Debug.Log(1);
                 Instantiate(Ground_1, new Vector3(transform.localPosition.x, 8, transform.localPosition.z), transform.rotation);
                 break;
             case 2:
-                Debug.Log(2);
                 Instantiate(Ground_2, new Vector3(transform.localPosition.x, 8, transform.localPosition.z), transform.rotation);
                 break;
             case 3:
-                Debug.Log(3);
                 Instantiate(Ground_3, new Vector3(transform.localPosition.x, 8, transform.localPosition.z), transform.rotation);
                 break;
             case 4:
-                Debug.Log(4);
                 Instantiate(Ground_4, new Vector3(transform.localPosition.x, 8, transform.localPosition.z), transform.rotation);
                 break;
             case 5:
-                Debug.Log(5);
                 Instantiate(Ground_5, new Vector3(transform.localPosition.x, 8, transform.localPosition.z), transform.rotation);
                 break;
         }

@@ -52,56 +52,59 @@ namespace Game
         void Update()
         {
 
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
-            if (Input.GetKeyDown(KeyCode.Space) && jumpCount != 0)
+            if (GameController._isPlaying && GameController.isContinueGame)
             {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
-                Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
-                jumpCount--;
-                isGround = false;
-            }
-
-            if (boosting)
-            {
-                boostTimer += Time.deltaTime;
-                if (boostTimer >= 3)
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
+                if (Input.GetKeyDown(KeyCode.Space) && jumpCount != 0)
                 {
-                    speed = 10;
-                    boostTimer = 0;
-                    boosting = false;
+                    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
+                    Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
+                    jumpCount--;
+                    isGround = false;
                 }
-            }
 
-            if (slowing)
-            {
-                slowTimer += Time.deltaTime;
-                if (slowTimer >= 3)
+                if (boosting)
                 {
-                    speed = 10;
-                    boostTimer = 0;
-                    boosting = false;
+                    boostTimer += Time.deltaTime;
+                    if (boostTimer >= 3)
+                    {
+                        speed = 10;
+                        boostTimer = 0;
+                        boosting = false;
+                    }
                 }
-            }
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && ammoAmount > 0)
-            {
-                if (canShoot)
+                if (slowing)
                 {
-                    StartCoroutine(shoot());
-                    ammoAmount -= 1;
-                    txtNumAmmo.text = ammoAmount.ToString();
+                    slowTimer += Time.deltaTime;
+                    if (slowTimer >= 3)
+                    {
+                        speed = 10;
+                        boostTimer = 0;
+                        boosting = false;
+                    }
                 }
-            }
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                var myShilde = Instantiate(shilde, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-                myShilde.transform.parent = gameObject.transform;
-            }
-            //Distance start position to end position
-            if (transform.position.x <= winZone.transform.position.x)
-            {
-                float distance = 1 - (getDistance() / maxDistance);
-                setProgress(distance);
+
+                if (Input.GetKeyDown(KeyCode.Mouse0) && ammoAmount > 0)
+                {
+                    if (canShoot)
+                    {
+                        StartCoroutine(shoot());
+                        ammoAmount -= 1;
+                        txtNumAmmo.text = ammoAmount.ToString();
+                    }
+                }
+                if (Input.GetKeyDown(KeyCode.C))
+                {
+                    var myShilde = Instantiate(shilde, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                    myShilde.transform.parent = gameObject.transform;
+                }
+                //Distance start position to end position
+                if (transform.position.x <= winZone.transform.position.x)
+                {
+                    float distance = 1 - (getDistance() / maxDistance);
+                    setProgress(distance);
+                }
             }
         }
 
