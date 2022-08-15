@@ -92,11 +92,7 @@ namespace Game
                     txtNumAmmo.text = ammoAmount.ToString();
                 }
             }
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                var myShilde = Instantiate(shilde, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-                myShilde.transform.parent = gameObject.transform;
-            }
+           
             //Distance start position to end position
             if (transform.position.x <= winZone.transform.position.x)
             {
@@ -120,6 +116,12 @@ namespace Game
             {
                 boosting = true;
                 speed = 15;
+                Destroy(collision.gameObject);
+            }
+            if (collision.tag == "BuffShield")
+            {
+                var myShilde = Instantiate(shilde, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+                myShilde.transform.parent = gameObject.transform;
                 Destroy(collision.gameObject);
             }
             if (collision.tag == "SlowSpeed")
