@@ -62,6 +62,7 @@ namespace Game
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
                 if (Input.GetKeyDown(KeyCode.Space) && jumpCount != 0)
                 {
+                    figure?.DoJumpAnim();
                     GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
                     Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), Quaternion.identity);
                     jumpCount--;
@@ -115,10 +116,7 @@ namespace Game
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "Collider")
-            {
-                collider = true;
-            }
+            
             if (collision.tag == "LightWareship")
             {
                 speed = 0;
@@ -126,6 +124,7 @@ namespace Game
             }
             if (collision.tag == "BuffSpeed")
             {
+                figure?.GetBuff();
                 boosting = true;
                 speed = 15;
                 Destroy(collision.gameObject);
@@ -140,6 +139,7 @@ namespace Game
             }
             if (collision.tag == "SlowSpeed")
             {
+                figure?.GetDeBuff();
                 boosting = true;
                 speed = 8;
                 Destroy(collision.gameObject);
@@ -167,8 +167,13 @@ namespace Game
             }
             if (collision.gameObject.tag == "lava")
             {
+                figure?.Die();
                 Time.timeScale = 0;
                 panel_YouLose.SetActive(true);
+            }
+            if (collision.gameObject.tag == "Collider")
+            {
+                figure?.Corlider();
             }
         }
         public IEnumerator shoot()
