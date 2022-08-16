@@ -16,6 +16,7 @@ TagManager:
   - lava
   - winZone
   - BuffShield
+  - TheShip
   layers:
   - Default
   - TransparentFX

@@ -58,7 +58,15 @@ namespace Game
 
                 if (isContinueGame)
                 {
-                    warShip.transform.Translate(Vector3.right * speed * Time.deltaTime);
+                    if (warShip.transform.position.x < player.transform.position.x)
+                    {
+                        warShip.transform.Translate(Vector3.right * speed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        player.GetComponent<Rigidbody2D>().gravityScale = -1f;
+                        xoay();
+                    }
                     if ((player.transform.localPosition.x - warShip.transform.position.x) >= 20)
                     {
                         speed = 15;
@@ -110,6 +118,14 @@ namespace Game
                 isContinueGame = true;
                 txtCountDownTimer.SetActive(false);
             }
+        }
+        public void xoay()
+        {
+            if(player.transform.localScale.x>=0)
+            {
+                player.transform.localScale += new Vector3(0.005f, 0.005f, 0.005f);
+            }
+            player.transform.Rotate(0, 0, -10f);
         }
     }
 }

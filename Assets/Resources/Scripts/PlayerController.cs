@@ -33,7 +33,6 @@ namespace Game
         public Slider sldProgressBarPercent;
         float maxDistance;
         //Position end map
-        bool isGround = false;
         int jumpCount = 2;
 
         public GameObject panel_YouLose, panel_YouWin;
@@ -65,7 +64,6 @@ namespace Game
                     GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
                     Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), Quaternion.identity);
                     jumpCount--;
-                    isGround = false;
                 }
 
                 if (boosting)
@@ -122,6 +120,11 @@ namespace Game
             if (collision.tag == "LightWareship")
             {
                 speed = 0;
+                //panel_YouLose.SetActive(true);
+            }
+            if (collision.tag == "TheShip")
+            {
+                Time.timeScale = 0f;
                 panel_YouLose.SetActive(true);
             }
             if (collision.tag == "BuffSpeed")
@@ -151,24 +154,16 @@ namespace Game
                 panel_YouWin.SetActive(true);
                 Time.timeScale = 0;
             }
-
-            if(collision.tag == "lava")
-            {
-                
-                Time.timeScale = 0;
-            }
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.tag == "isGround")
             {
-                isGround = true;
                 jumpCount = 2;
             }
             if (collision.gameObject.tag == "lava")
             {
-                Time.timeScale = 0;
-                panel_YouLose.SetActive(true);
+                speed = 0;
             }
         }
         public IEnumerator shoot()
