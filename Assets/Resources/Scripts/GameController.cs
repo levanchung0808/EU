@@ -32,8 +32,8 @@ namespace Game
 
             speed = 10;
             Mixer.Init();
-            string axieId = PlayerPrefs.GetString("selectingId", "5");
-            string genes = PlayerPrefs.GetString("selectingGenes", "0x2000000000000300008100e08308000000010010088081040001000010a043020000009008004106000100100860c40200010000084081060001001410a04406");
+            string axieId = PlayerPrefs.GetString("axieId");
+            string genes = PlayerPrefs.GetString("genesStr");
             _birdFigure.SetGenes(axieId, genes);
         }
 

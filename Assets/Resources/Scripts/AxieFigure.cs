@@ -64,9 +64,33 @@ namespace Game
         public void DoJumpAnim()
         {
             skeletonAnimation.timeScale = 1f;
-            skeletonAnimation.AnimationState.SetAnimation(0, "action/move-forward", false);
+            skeletonAnimation.AnimationState.SetAnimation(0, "attack/ranged/cast-fly", false);
         }
-
+        public void Corlider()
+        {
+            skeletonAnimation.timeScale = 1f;
+            skeletonAnimation.AnimationState.SetAnimation(0, "defense/hit-by-normal", false);
+        }
+        public void GetBuff()
+        {
+            skeletonAnimation.timeScale = 1f;
+            skeletonAnimation.AnimationState.SetAnimation(0, "battle/get-buff", false);
+        }
+        public void GetDeBuff()
+        {
+            skeletonAnimation.timeScale = 1f;
+            skeletonAnimation.AnimationState.SetAnimation(0, "battle/get-debuff", false);
+        }
+        public void Die()
+        {
+            skeletonAnimation.timeScale = 1f;
+            skeletonAnimation.AnimationState.SetAnimation(0, "attack/melee/tail-roll", false);
+        }
+        public void Attack()
+        {
+            skeletonAnimation.timeScale = 1f;
+            skeletonAnimation.AnimationState.SetAnimation(0, "activity/eat-chew", false);
+        }
         private void SpineEndHandler(TrackEntry trackEntry)
         {
             string animation = trackEntry.Animation.Name;
