@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Coin : MonoBehaviour
 {
@@ -28,6 +29,13 @@ public class Coin : MonoBehaviour
         if (count == 180)
         {
             iStop = true;
+            StartCoroutine(LoadScreenLobby());
         }
+    }
+
+    IEnumerator LoadScreenLobby()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }
 }

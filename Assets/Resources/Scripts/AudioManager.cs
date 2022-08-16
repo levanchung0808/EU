@@ -20,7 +20,6 @@ public class AudioManager : MonoBehaviour
 
     public static void SetAudio(string _nameAudio)
     {
-        Debug.Log(audio);
         if (_nameAudio != null)
         {
             audio.PlayOneShot(Resources.Load<AudioClip>("Audio/" + _nameAudio));

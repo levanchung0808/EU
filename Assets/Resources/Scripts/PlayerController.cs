@@ -100,6 +100,7 @@ namespace Game
                     {
                         figure?.Attack();
                         StartCoroutine(shoot());
+                        AudioManager.SetAudio("fire");
                         ammoAmount -= 1;
                         txtNumAmmo.text = ammoAmount.ToString();
                     }
@@ -124,6 +125,10 @@ namespace Game
             if (collision.tag == "LightWareship")
             {
                 speed = 0;
+                boostTimer = 0;
+                slowTimer = 0;
+                boosting = false;
+                slowing = false;
                 //panel_YouLose.SetActive(true);
             }
             if (collision.tag == "TheShip")
@@ -135,7 +140,7 @@ namespace Game
             {
                 figure?.GetBuff();
                 boosting = true;
-                speed = 15;
+                speed = 12;
                 Destroy(collision.gameObject);
                 var myBuffSpeed = Instantiate(buffSpeed, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 myBuffSpeed.transform.parent = gameObject.transform;
@@ -158,7 +163,8 @@ namespace Game
             if (collision.tag == "winZone")
             {
                 panel_YouWin.SetActive(true);
-                Time.timeScale = 0;
+                AudioManager.SetAudio("wingame");
+                GameController.isContinueGame = false;
             }
         }
         private void OnCollisionEnter2D(Collision2D collision)
@@ -169,9 +175,12 @@ namespace Game
             }
             if (collision.gameObject.tag == "lava")
             {
-                figure?.Die();
-                Time.timeScale = 0;
-                panel_YouLose.SetActive(true);
+                 figure?.Die();
+                boostTimer = 0;
+                slowTimer = 0;
+                boosting = false;
+                slowing = false;
+                speed = 0;
             }
             if (collision.gameObject.tag == "Collider")
             {

@@ -84,7 +84,7 @@ namespace Game
         public void Die()
         {
             skeletonAnimation.timeScale = 1f;
-            skeletonAnimation.AnimationState.SetAnimation(0, "attack/melee/tail-roll", false);
+            skeletonAnimation.AnimationState.SetAnimation(0, "attack/melee/tail-roll", true);
         }
         public void Attack()
         {

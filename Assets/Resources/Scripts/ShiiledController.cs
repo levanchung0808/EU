@@ -35,6 +35,7 @@ public class ShiiledController : MonoBehaviour
             ani.Play("Destroyshiled");
             Instantiate(impactEffect, collision.transform.position, collision.transform.rotation);
             Destroy(collision.gameObject);
+            AudioManager.SetAudio("breakblock");
         }
     }
 }

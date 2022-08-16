@@ -17,16 +17,19 @@ namespace Game
         [SerializeField] AxieFigure _birdFigure;
         public float speed;
         [SerializeField] GameObject _startMsgGO;
-        public static bool _isPlaying = false;
+        public static bool _isPlaying;
 
         [SerializeField] GameObject txtCountDownTimer;
         public int secondsLeft = 3;
         public bool takingAway = true;
         public static bool isContinueGame = false;
+        public GameObject panel_GiftNFTToken;
+        bool checkAudio = false;
 
         // Start is called before the first frame update
         void Start()
         {
+            _isPlaying = false;
             Time.timeScale = 0f;
             txtCountDownTimer.GetComponent<Text>().text = secondsLeft + "";
 
@@ -40,6 +43,7 @@ namespace Game
         // Update is called once per frame
         void Update()
         {
+
             if (!_isPlaying)
             {
                 _startMsgGO.SetActive((Time.unscaledTime % .5 < .2));
@@ -64,8 +68,15 @@ namespace Game
                     }
                     else
                     {
-                        player.GetComponent<Rigidbody2D>().gravityScale = -1f;
-                        xoay();
+                        player.GetComponent<BoxCollider2D>().isTrigger = true;
+                        player.GetComponent<Rigidbody2D>().gravityScale = -0.05f;
+                        rotatePlayerDie();
+                        if (!checkAudio)
+                        {
+                            AudioManager.SetAudio("die");
+                            checkAudio = true;
+                        }
+
                     }
                     if ((player.transform.localPosition.x - warShip.transform.position.x) >= 20)
                     {
@@ -90,7 +101,7 @@ namespace Game
         }
         public void gameLoad()
         {
-            Time.timeScale = 1;
+            Time.timeScale = 1f;
             gamePause.SetActive(false);
             // gameCompelete.SetActive(false);
         }
@@ -106,6 +117,11 @@ namespace Game
             SceneManager.LoadScene("Level_Game");
         }
 
+        public void gameLobby()
+        {
+            SceneManager.LoadScene("Lobby");
+        }
+
         IEnumerator TimeTake()
         {
             takingAway = true;
@@ -113,19 +129,25 @@ namespace Game
             secondsLeft -= 1;
             txtCountDownTimer.GetComponent<Text>().text = secondsLeft + "";
             takingAway = false;
-            if(secondsLeft == 0)
+            if (secondsLeft == 0)
             {
                 isContinueGame = true;
                 txtCountDownTimer.SetActive(false);
             }
         }
-        public void xoay()
+        public void rotatePlayerDie()
         {
-            if(player.transform.localScale.x>=0)
+            if (player.transform.localScale.x >= 0)
             {
-                player.transform.localScale += new Vector3(0.005f, 0.005f, 0.005f);
+                player.transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
             }
-            player.transform.Rotate(0, 0, -10f);
+            player.transform.Rotate(0, 0, -1f);
         }
+
+        public void giftNFTToken()
+        {
+            panel_GiftNFTToken.SetActive(true);
+        }
+
     }
 }
