@@ -18,9 +18,10 @@ public class LoadScreen : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.anyKeyDown)
             {
                 LoadScreenManager();
+                AudioManager.SetAudio("click");
             }
         }
     }

@@ -86,6 +86,11 @@ namespace Game
             skeletonAnimation.timeScale = 1f;
             skeletonAnimation.AnimationState.SetAnimation(0, "attack/melee/tail-roll", false);
         }
+        public void Attack()
+        {
+            skeletonAnimation.timeScale = 1f;
+            skeletonAnimation.AnimationState.SetAnimation(0, "activity/eat-chew", false);
+        }
         private void SpineEndHandler(TrackEntry trackEntry)
         {
             string animation = trackEntry.Animation.Name;

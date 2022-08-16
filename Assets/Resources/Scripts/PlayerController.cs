@@ -35,11 +35,15 @@ namespace Game
         //Position end map
         bool isGround = false;
         int jumpCount = 2;
-
+        //Audio
+        static AudioSource audio;
+        public AudioClip clickSound;
+        //GUI
         public GameObject panel_YouLose, panel_YouWin;
 
         void Start()
         {
+            audio = GetComponent<AudioSource>();
             figure = gameObject.GetComponentInChildren<AxieFigure>();
             speed = 10;
             velocity = 1;
@@ -62,6 +66,7 @@ namespace Game
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
                 if (Input.GetKeyDown(KeyCode.Space) && jumpCount != 0)
                 {
+                    AudioManager.SetAudio("jump");
                     figure?.DoJumpAnim();
                     GetComponent<Rigidbody2D>().AddForce(new Vector2(0, velocity * 500));
                     Instantiate(jumpEffect, new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z), Quaternion.identity);
@@ -95,6 +100,7 @@ namespace Game
                 {
                     if (canShoot)
                     {
+                        figure?.Attack();
                         StartCoroutine(shoot());
                         ammoAmount -= 1;
                         txtNumAmmo.text = ammoAmount.ToString();
